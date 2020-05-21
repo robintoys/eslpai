@@ -22,7 +22,7 @@
                         var jsondiv = document.createElement("div");
                         obj['data'].forEach(function(item){
                             mediaUrl=item['mediaUrl'].replace('http://', '//');
-                            jsondiv.innerHTML += "<p>" + item['title'] +":<audio class=player controls><source src="+item['mediaUrl']+"></audio></p>";
+                            jsondiv.innerHTML += "<p>" + item['title'] +":<audio class=player controls><source src="+mediaUrl+"></audio></p>";
                         })
                         ezfm.appendChild(jsondiv);
 

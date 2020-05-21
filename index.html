@@ -4,14 +4,14 @@
         <style type="text/css">
             .player {
                 filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);
-                 width: 400px;
+                width: 400px;
                 height: 25px;
                 padding: 3px;
             }
         </style>
         <script type="text/javascript">
             window.onload =function() {
-                var ezfm_url = "http://ezfm.cri.cn/schedule/getlist?programId=159&page=1&type=other&sort=0&callback=1";
+                var ezfm_url = "//ezfm.cri.cn/schedule/getlist?programId=159&page=1&type=other&sort=0&callback=1";
                 var request  = new XMLHttpRequest();
                 request.open("GET",ezfm_url);
                 request.send(null);

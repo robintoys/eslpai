@@ -4,103 +4,35 @@
         <style type="text/css">
             .player {
                 filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);
-                 width: 600px;
+                 width: 400px;
                 height: 25px;
                 padding: 3px;
             }
-            .newstitle {
-                padding: 3px;
-            }
-
-            .transcript {
-                font-size: 14px;
-                width: 700px;
-            }
         </style>
         <script type="text/javascript">
-            function viewscript() {
-                var elem = document.getElementById("transcript");
-                var bt = document.getElementById("bt1");
-                elem.style.display="none";
-                var flag=1;
-                bt.addEventListener('click', function(){
-                    if(flag) {
-                        elem.style.display="block";
-                        bt.innerHTML = "隐藏脚本";
-                        flag = 0;
-                    } else {
-                        elem.style.display = "none";
-                        bt.innerHTML = "查看脚本";
-                        flag = 1;
+            window.onload =function() {
+                var ezfm_url = "http://ezfm.cri.cn/schedule/getlist?programId=159&page=1&type=other&sort=0&callback=1";
+                var request  = new XMLHttpRequest();
+                request.open("GET",ezfm_url);
+                request.send(null);
+                request.onload = function() {
+                    if(request.status == 200) {
+                        var ezfmdiv = document.getElementById("ezfm");
+                        var obj = JSON.parse(request.responseText);
+                        var jsondiv = document.createElement("div");
+                        obj['data'].forEach(function(item){
+                            jsondiv.innerHTML += "<p>" + item['title'] +":<audio class=player controls><source src="+item['mediaUrl']+"></audio></p>";
+                        })
+                        ezfm.appendChild(jsondiv);
+
                     }
-                });
+                }
             }
         </script>
     </head>
-    <body onload="viewscript();">
-        <h1>ezfm news</h1>
-        <div id>
-        <p class="newstitle">2020-05-19 上午新闻</p>
-        <p id="playercontainer">
-            <audio class = "player" controls width="100" height="50">
-            <source src="http://resezfm.meldingcloud.com/ueditor/audio/2005/1089853227246.mp3" type="audio/mp3">
-            </audio>
-        </p>
-        脚本文件：<button id="bt1">查看脚本</button>
-        <p id="transcript" class="transcript">
-China announces concrete measures to boost global fight against COVID-19 as Xi addresses WHA session. <br />
-President Xi Jinping has announced that China will provide aid to the international community to fight Covid-19.<br />
-He made the announcement while addressing the 73rd session of the World Health Assembly (WHA) via video link.<br />
-"China will provide $2 billion over two years to help with COVID-19 response and with economic and social development in affected countries, especially developing countries."
-He says China will work with the United Nations to set up a global humanitarian response depot and hub in China, and ensure the operation of anti-epidemic supply chains.
-Meanwhile, He says China will establish a cooperation plan for African hospitals.<br />
-He says China is ready to work with the international community to bolster support for the hardest-hit countries under the greatest strain of debt service so that they can tide over the current difficulties.<br />
-China to expand opening-up despite COVID-19 impact: commerce minister <br /> 
-China will continue to broaden market access and open up its service sector as part of efforts to keep foreign investment stable amid the COVID-19 epidemic.<br />
-Commerce minister Zhong Shan says China will take various measures to stabilize foreign investment, including bolstering trade with countries along the Belt and Road.<br />
-</br>
-"While consolidating traditional markets, we are also exploring new markets. The demand from belt and road related countries saw a big rise in the first 4 months of this year. The Association of the South East Asian nations has become the country's largest trading partner."
-He says China will roll out incentives to attract foreign investment into the country's central and western regions as well as the old industrial bases in the northeast regions.
-The country will expand the scope of pilot free trade zones, give them greater autonomy in their reform, and further accelerate the construction of a free trade port in Hainan Province
-The ministry will also focus on implementing the Foreign Investment Law, creating a fair and competitive market environment for foreign investors.<br />
- 
-China unveils guideline to accelerate improving socialist market economy in new era<br />
- 
-China has issued a guideline to accelerate the improvement of its socialist market economy.<br />
-It says that China will improve the basic system of keeping public ownership as the mainstay, and allow multiple forms of ownership to develop together.<br />
-It also stressed minimizing the government's direct allocation of market resources and intervention in microeconomic activities.<br />
-The guideline says the country will expand imports of goods and services on a large scale, reducing the overall tariff level and eliminating non-tariff trade barriers.<br />
-Restrictions on foreign investment outside the negative list will be lifted completely.<br />
- 
-China city imposes tougher restrictions for epidemic control<br />
- 
-A city in Jilin Province has imposed complete closed-off management for local residential communities with confirmed or suspected cases of COVID-19.<br />
-Stores and supermarkets in Shulan are now responsible for delivering daily necessities.<br />
-People who work for government agencies or companies that have resumed operations need special passes for entry and exit of their residential communities.<br />
-Households in other residential communities or villages are only allowed to dispatch one family member once every two days to go shopping for living materials for no more than two hours.<br />
-Since the city saw a new locally-transmitted COVID-19 case on May 7, Shulan has reported 19 new local confirmed cases, and over 500 close contacts of the cases.<br />
- 
-U.S. COVID-19 cases top 1.5 mln as death toll exceeds 90,000: Johns Hopkins University<br />
- 
-Confirmed cases of COVID-19 in the United States have topped 1.5 million.<br />
-Figures from Johns Hopkins University show that COVID-19 deaths rose to over 90,000 as of Monday.<br />
-The state of New York remains hardest-hit with over 351,000 cases and more than 28,000 deaths.<br />
-Other states with over 50,000 cases include New Jersey, California and Michigan.<br />
-Meanwhile, over 40 states have started to partially or fully reopen their economies.<br />
-However, the U.S. in general is yet to see a downward trend in the rate of COVID-19 infection.<br />
- 
-California easing statewide rules to reopen<br />
- 
-California Governor Gavin Newsom has announced that the state is relaxing some of its reopening criteria.<br />
-This means most of the state may soon be offering services such as dining at restaurants.<br />
-He says it applies to counties that want to reopen faster than the state, and estimates that 53 of 58 counties could meet the new criteria.<br />
- 
-EU pledges 151 million USD to boost food security in East Africa<br />
- 
-The European Union says it's put together 151 million U.S. dollars in financial aid to bolster food security in East Africa.<br />
-Food security in the region has suffered during the COVID-19 pandemic.<br />
-The EU says the grant will provide support to farmers and small and medium sized enterprises.<br />
-</p>
+    <body>
+        <h2>轻松调频英语听力练习</h2>
+        <div id="ezfm">
         </div>
     </body>
 </html>

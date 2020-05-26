@@ -2,37 +2,41 @@
     <head>
         <title> ezfm news headlines everyday</title>
         <style type="text/css">
-            .player {
-                filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);
-                width: 400px;
-                height: 25px;
-                padding: 3px;
-            }
-        </style>
-        <script type="text/javascript">
-            window.onload =function() {
-                var ezfm_url = "//ezfm.cri.cn/schedule/getlist?programId=159&page=1&type=other&sort=0&callback=1";
-                var request  = new XMLHttpRequest();
-                request.open("GET",ezfm_url);
-                request.send(null);
-                request.onload = function() {
-                    if(request.status == 200) {
-                        var ezfmdiv = document.getElementById("ezfm");
-                        var obj = JSON.parse(request.responseText);
-                        var jsondiv = document.createElement("div");
-                        obj['data'].forEach(function(item){
-                            jsondiv.innerHTML += "<p>" + item['title'] +":<audio class=player controls><source src="+item['mediaUrl']+"></audio></p>";
-                        })
-                        ezfm.appendChild(jsondiv);
-
-                    }
+                ul {
+                    position: fixed;
+                    top: 0;
+                    width: 100%;
+                    list-style-type: none;
+                    margin: 0;
+                    padding: 0;
+                    overflow: hidden;
+                    border: 1px solid #e7e7e7;
+                    background-color: black;
                 }
-            }
-        </script>
+                
+                li {
+                    float: left;
+                }
+                
+                li a {
+                    display: block;
+                    color: white;
+                    text-align: center;
+                    padding: 8px 16px;
+                    text-decoration: none;
+                }
+                
+                /*鼠标移动到选项上修改背景颜色 */
+                li a:hover {
+                    background-color:darkseagreen;
+                }
+        </style>
     </head>
     <body>
-        <h2>轻松调频英语听力练习</h2>
-        <div id="ezfm">
-        </div>
+    <ul>
+        <li><a href="./ezfmnews/">英语听写练习</a></li>
+        <li><a href="./magaselected/">英语杂志精选</a></li>
+        <li><a href="./contact/">找组织</a></li>
+    </ul>
     </body>
 </html>
